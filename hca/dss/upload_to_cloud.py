@@ -58,7 +58,7 @@ def upload_to_cloud(file_paths, staging_bucket, replica, from_cloud=False, log_p
     Upload files to cloud.
 
     :param file_paths: If from_cloud, file_handles is a aws s3 directory path to files with appropriate
-                       metadata uploaded. Else, a list of paths of file to upload.
+                       metadata uploaded. Else, a list of paths of files to upload.
     :param staging_bucket: The aws bucket to upload the files to.
     :param replica: The cloud replica to write to. One of 'aws', 'gc', or 'azure'. No functionality now.
     :param bool log_progress: set to True to log progress to stdout. Progress bar will reflect bytes

@@ -421,14 +421,13 @@ class TestDssApi(unittest.TestCase):
 
 class TestDssApiFileLimit(unittest.TestCase):
     staging_bucket = "org-humancellatlas-dss-cli-test"
-    old_open_file_limits = resource.getrlimit(resource.RLIMIT_NOFILE)
 
     def test_python_open_file_limit_upload(self):
         old_open_file_limits = resource.getrlimit(resource.RLIMIT_NOFILE)
         bundle_path = os.path.join(TEST_DIR, "upload", "many-files")
         uploaded_paths = [x.path for x in iter_paths(str(bundle_path))]
         uploaded_files = [object_name_builder(p, bundle_path) for p in uploaded_paths]
-        client = hca.dss.DSSClient(swagger_url="https://dss.data.humancellatlas.org/v1/swagger.json")
+        client = hca.dss.DSSClient()
         resource.setrlimit(resource.RLIMIT_NOFILE, (9, old_open_file_limits[1]))
         try:
             manifest = client.upload(src_dir=bundle_path,
