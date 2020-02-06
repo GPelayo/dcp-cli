@@ -84,8 +84,8 @@ def upload_to_cloud(file_paths, staging_bucket, replica, from_cloud=False, log_p
             logger.addHandler(ProgressBarStreamHandler())
             progress = tqdm.tqdm(total=total_upload_size, desc="Uploading to " + replica,
                                  unit="B", unit_scale=True, unit_divisor=1024)
-        for file_name in file_paths:
-            with open(file_name, 'rb') as raw_fh:
+        for file_path in file_paths:
+            with open(file_path, 'rb') as raw_fh:
                 file_size = os.path.getsize(raw_fh.name)
                 multipart_chunksize = s3_multipart.get_s3_multipart_chunk_size(file_size)
                 tx_cfg = TransferConfig(multipart_threshold=s3_multipart.MULTIPART_THRESHOLD,
